@@ -5,20 +5,18 @@ const helmet = require('helmet');
 const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js');
 const userRouter = require("../users/users-router.js");
-const plantsRouter = require('../plants/plants-router.js');
 
 const server = express();
 
 server.use(helmet());
-server.use(cors());
 server.use(express.json());
+server.use(cors());
 
 server.use('/auth', authRouter);
 server.use('/users', authenticate, userRouter);
-server.use('/plants', authenticate, plantsRouter);
 
-server.get("/", (res, req) => {
-    res.status(200).json({ api: "it's alive!"});
+server.get("/", (req, res) => {
+    res.status(200).json({ api: "it's working! IT'S WORKING!"});
 });
 
 module.exports = server;
