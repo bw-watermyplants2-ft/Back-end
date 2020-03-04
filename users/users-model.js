@@ -66,7 +66,7 @@ function addPlant(plant, userId){
 
 function updatePlant(changes, plantId){
     return db("plants")
-        .where({ id: plantId })
+        .where({ "plant.id": plantId })
         .update(changes)
         .then(updatedPlant => {
             return findById(id[0]);

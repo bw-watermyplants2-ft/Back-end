@@ -11,7 +11,7 @@ router.get("/:id/info", (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({error: err})
+            res.status(500).json({errorMessage: err})
         });
 });
 
@@ -27,7 +27,7 @@ router.get("/:id/plants", (req, res) => {
                     })
                     .catch(err => {
                         console.log(err)
-                        res.status(500).json({error: err})
+                        res.status(500).json({errorMessage: "unable to process this request"})
                     });
             } else {
                 res.status(404).json({errorMessage: "user not found"})
@@ -35,7 +35,7 @@ router.get("/:id/plants", (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({error: err})
+            res.status(500).json({errorMessage: "unable to process this request"})
         });
 })
 
@@ -48,13 +48,13 @@ router.get("/:id/plants/:plantId", (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({errorMessage: err})
+            res.status(500).json({errorMessage: "unable to process this request"})
         });
 })
 
 router.post("/:id/plants", (req, res) =>{
     const userId = req.params.id
-    const newPlant = {...req.body, user_id: id}
+    const newPlant = {...req.body, user_id: userId}
 
     Users.addPlant(newPlant, userId)
         .then(plant => {
@@ -62,36 +62,58 @@ router.post("/:id/plants", (req, res) =>{
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({error: err})
+            rres.status(500).json({errorMessage: "unable to process this request"})
         });
 })
 
-router.put("/:id/plants/:plantId", (req, res) =>{
-    const id = req.params.id
+router.put("/:userId/plants/:plantId", (req, res) =>{
+    const { userId, plantId } = req.params
     const changes = req.body
-
-    Users.updatePlant(id)
-    .then( {
-        
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({error: err})
-    });
+    
+    Users.findUsersId(userId)
+        .then(user => {
+            if(user){    
+                Users.updatePlant(plantId)
+                    .then(updated => {
+                        res.status(200).json(updated);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({errorMessage: "unable to process this request"})
+                    });
+            } else {
+                res.status(404).json({errorMessage: "user not found"})
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({errorMessage: "unable to process this request"})
+        });
 })
 
 
-router.delete("/:id/plants/:plantId", (req, res) =>{
-    const id = req.params.id
+router.delete("/:userId/plants/:plantId", (req, res) =>{
+    const { userId, plantId } = req.params
 
-    Users.removePlant(id)
-    .then( {
-
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({error: err})
-    });
+    Users.findUsersId(userId)
+        .then(user => {
+            if(user){    
+                Users.removePlant(plantId)
+                    .then(removed => {
+                        res.status(200).json({message: "successfully deleted"});
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({errorMessage: "unable to process this request"})
+                    });
+            } else {
+                res.status(404).json({errorMessage: "user not found"})
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({errorMessage: "unable to process this request"})
+        });
 })
 
 
