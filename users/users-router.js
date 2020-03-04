@@ -26,7 +26,7 @@ router.put("/:userId", (req, res) =>{
             if(user){    
                 Users.updateUser(changes, userId)
                     .then(updated => {
-                        res.status(200).json(updated)
+                        res.status(200).json({message: "successfully updated user information"})
                     })
                     .catch(err => {
                         console.log(err)

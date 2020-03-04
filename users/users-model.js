@@ -28,7 +28,7 @@ function updateUser(changes, userId){
 
 function findUsersId(id) {
     return db("users")
-        .select("id", "username", "phone_number", "password")
+        .select("id", "username", "phone_number")
         .where({ id })
         .first()
 }
