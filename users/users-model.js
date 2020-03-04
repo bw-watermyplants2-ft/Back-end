@@ -78,7 +78,7 @@ function updatePlant(changes, plantId){
         .where({ "id": plantId})
         .update(changes)
         .then(updatedPlant => {
-            return findByPlantId(id[0]);
+            return findByPlantId(plantId[0]);
         });
 };
 

@@ -2,11 +2,11 @@ const router = require("express").Router();
 
 const Users = require("./users-model.js");
 
-//user's info
-router.get("/:userId/info", (req, res) => {
+//user's info//
+router.get("/:userId", (req, res) => {
     const id = req.params.userId
 
-    Users.findUsers(id)
+    Users.findUsersId(id)
         .then(user => {
             res.status(200).json(user);
         })
@@ -42,7 +42,7 @@ router.put("/:userId", (req, res) =>{
         });
 })
 
-//read plants by user
+//get plants by user
 router.get("/:userId/plants", (req, res) => {
     const userId = req.params.userId
 
