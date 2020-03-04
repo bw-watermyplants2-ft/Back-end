@@ -12,7 +12,7 @@ router.post("/register", (req, res) => {
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
 
-    Users.add(user)
+    Users.addUser(user)
         .then(saved => {
             res.status(201).json(saved);
         })
@@ -23,52 +23,48 @@ router.post("/register", (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  // implement login
+  // implement login    
+    if (req.body.username){
+        Users.findBy({ username: req.body.username})
+        .first()
+        .then(user => {
+            if (user && bcrypt.compareSync(req.body.password, user.password)) {
+            const token = generateToken(user); // get a token
 
-    
-        if (req.body.username){
-            Users.findBy({ username: req.body.username})
-            .first()
-            .then(user => {
-                if (user && bcrypt.compareSync(req.body.password, user.password)) {
-                const token = generateToken(user); // get a token
-    
-                    res.status(200).json({
-                    message: `Welcome ${user.username}!`,
-                    token, // send the token
-                    });
-                } else {
-                    res.status(401).json({ message: "Invalid Credentials" });
-                }
-            })
-            .catch(error => {
-                console.log("ERROR:", error);
-                res.status(500).json({ error: "/login error" });
+                res.status(200).json({
+                message: `Welcome ${user.username}!`,
+                token, // send the token
+                });
+            } else {
+                res.status(401).json({ message: "Invalid Credentials" });
+            }
+        })
+        .catch(error => {
+            console.log("ERROR:", error);
+            res.status(500).json({ error: "/login error" });
+        });
+
+    } else {
+
+    Users.findBy({ phone_number: req.body.phone_number})
+    .first()
+    .then(user => {
+        if (user && bcrypt.compareSync(req.body.password, user.password)) {
+        const token = generateToken(user); // get a token
+
+            res.status(200).json({
+            message: `Welcome ${user.username}!`,
+            token, // send the token
             });
-
         } else {
-            Users.findBy({ phone_number: req.body.phone_number})
-            .first()
-            .then(user => {
-                if (user && bcrypt.compareSync(req.body.password, user.password)) {
-                const token = generateToken(user); // get a token
-    
-                    res.status(200).json({
-                    message: `Welcome ${user.username}!`,
-                    token, // send the token
-                    });
-                } else {
-                    res.status(401).json({ message: "Invalid Credentials" });
-                }
-            })
-            .catch(error => {
-                console.log("ERROR:", error);
-                res.status(500).json({ error: "/login error" });
-            });
-
+            res.status(401).json({ message: "Invalid Credentials" });
         }
-
-
+    })
+    .catch(error => {
+        console.log("ERROR:", error);
+        res.status(500).json({ error: "/login error" });
+    });
+    }
 });
 
 function generateToken(user) {
@@ -79,7 +75,7 @@ function generateToken(user) {
     };
 
     const options = {
-        expiresIn: "1h",
+        expiresIn: "3h",
     };
 
     return jwt.sign(payload, jwtSecret, options);
