@@ -2,19 +2,28 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
     addUser,
+    updateUser,
     findUsersId,
-    addPlant,
     findBy,
     findByPlantId,
     findPlantsByUser,
+    addPlant,
     updatePlant,
     removePlant,
 };
 
-
 async function addUser(user) {
     const [id] = await db("users").insert(user);
     return findUsersId(id);
+}
+
+function updateUser(changes, userId){
+    return db("users")
+        .where({ "id": userId})
+        .update(changes)
+        .then(updatedUser => {
+            return findUsersId(userId[0]);
+        });
 }
 
 function findUsersId(id) {
@@ -66,10 +75,10 @@ function addPlant(plant, userId){
 
 function updatePlant(changes, plantId){
     return db("plants")
-        .where({ "plant.id": plantId })
+        .where({ "id": plantId})
         .update(changes)
         .then(updatedPlant => {
-            return findById(id[0]);
+            return findByPlantId(id[0]);
         });
 };
 

@@ -2,8 +2,9 @@ const router = require("express").Router();
 
 const Users = require("./users-model.js");
 
-router.get("/:id/info", (req, res) => {
-    const id = req.params.id
+//user's info
+router.get("/:userId/info", (req, res) => {
+    const id = req.params.userId
 
     Users.findUsers(id)
         .then(user => {
@@ -15,8 +16,35 @@ router.get("/:id/info", (req, res) => {
         });
 });
 
-router.get("/:id/plants", (req, res) => {
-    const userId = req.params.id
+//update user's info
+router.put("/:userId", (req, res) =>{
+    const userId = req.params.userId;
+    const changes = req.body;
+    
+    Users.findUsersId(userId)
+        .then(user => {
+            if(user){    
+                Users.updateUser(changes, userId)
+                    .then(updated => {
+                        res.status(200).json(updated)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({errorMessage: "unable to process this request"})
+                    })
+            } else {
+                res.status(404).json({errorMessage: "user not found"})
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({errorMessage: "unable to process this request"})
+        });
+})
+
+//read plants by user
+router.get("/:userId/plants", (req, res) => {
+    const userId = req.params.userId
 
     Users.findUsersId(userId)
         .then(user => {
@@ -39,8 +67,9 @@ router.get("/:id/plants", (req, res) => {
         });
 })
 
-router.get("/:id/plants/:plantId", (req, res) => {
-    const { id, plantId } = req.params
+//get plant by plant id
+router.get("/:userId/plants/:plantId", (req, res) => {
+    const { userId, plantId } = req.params
 
     Users.findByPlantId(plantId)
         .then(plants => {
@@ -52,6 +81,7 @@ router.get("/:id/plants/:plantId", (req, res) => {
         });
 })
 
+//add new plant
 router.post("/:id/plants", (req, res) =>{
     const userId = req.params.id
     const newPlant = {...req.body, user_id: userId}
@@ -66,21 +96,33 @@ router.post("/:id/plants", (req, res) =>{
         });
 })
 
+//update plant
 router.put("/:userId/plants/:plantId", (req, res) =>{
     const { userId, plantId } = req.params
     const changes = req.body
-    
+
     Users.findUsersId(userId)
         .then(user => {
             if(user){    
-                Users.updatePlant(plantId)
-                    .then(updated => {
-                        res.status(200).json(updated);
+                Users.findByPlantId(plantId)
+                    .then(plant => {
+                        if(plant){
+                            Users.updatePlant(changes, plantId)
+                                .then(updated => {
+                                    res.status(200).json(updated).json({message: "successfully updated"});
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    res.status(500).json({errorMessage: "unable to process this request"})
+                                });
+                        } else {
+                            res.status(404).json({errorMessage: "plant not found"})
+                        }
                     })
                     .catch(err => {
                         console.log(err)
                         res.status(500).json({errorMessage: "unable to process this request"})
-                    });
+                    })
             } else {
                 res.status(404).json({errorMessage: "user not found"})
             }
@@ -91,21 +133,32 @@ router.put("/:userId/plants/:plantId", (req, res) =>{
         });
 })
 
-
+//delete plant
 router.delete("/:userId/plants/:plantId", (req, res) =>{
     const { userId, plantId } = req.params
 
     Users.findUsersId(userId)
         .then(user => {
             if(user){    
-                Users.removePlant(plantId)
-                    .then(removed => {
-                        res.status(200).json({message: "successfully deleted"});
+                Users.findByPlantId(plantId)
+                    .then(plant => {
+                        if(plant){
+                            Users.removePlant(plantId)
+                                .then(removed => {
+                                    res.status(200).json({message: "successfully deleted"});
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    res.status(500).json({errorMessage: "unable to process this request"})
+                                });
+                        } else {
+                            res.status(404).json({errorMessage: "plant not found"})
+                        }
                     })
                     .catch(err => {
                         console.log(err)
                         res.status(500).json({errorMessage: "unable to process this request"})
-                    });
+                    })
             } else {
                 res.status(404).json({errorMessage: "user not found"})
             }
@@ -115,6 +168,5 @@ router.delete("/:userId/plants/:plantId", (req, res) =>{
             res.status(500).json({errorMessage: "unable to process this request"})
         });
 })
-
 
 module.exports = router;
