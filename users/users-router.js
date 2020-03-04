@@ -42,6 +42,31 @@ router.put("/:userId", (req, res) =>{
         });
 })
 
+//delete user
+router.delete("/:userId", (req, res) =>{
+    const userId = req.params.userId;
+    
+    Users.findUsersId(userId)
+        .then(user => {
+            if(user){    
+                Users.removeUser(userId)
+                    .then(removed => {
+                        res.status(200).json({message: "successfully deleted user"})
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({errorMessage: "unable to process this request"})
+                    })
+            } else {
+                res.status(404).json({errorMessage: "user not found"})
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({errorMessage: "unable to process this request"})
+        });
+})
+
 //get plants by user
 router.get("/:userId/plants", (req, res) => {
     const userId = req.params.userId
