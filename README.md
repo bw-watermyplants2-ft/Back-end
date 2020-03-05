@@ -22,7 +22,7 @@ Ensuring that all your plants are consistently watered can be quite the task. Wa
 - What features may you wish to put in a future release?
     - Upload plant images
     - Allow users to differentiate gardens - example: indoor & outdoor plant groupings
-    - 
+    - Provide automated information about plant species and watering frequency
     - Automate notifications for watering frequency
 
 
@@ -30,16 +30,15 @@ Ensuring that all your plants are consistently watered can be quite the task. Wa
 
 - What 3rd party frameworks/libraries are you considering using?
     - React Hook Form (form validation instead of Formik) https://react-hook-form.com – React I
-    - Context – React II
+    - Redux – React II
     - Express – Backend
     - Node – Backend
 
 - Do APIs require you to contact its maintainer to gain access?
-    -no
-
-- Are you required to pay to use the API?<br>
     - no
 
+- Are you required to pay to use the API?
+    - no
 
 ## Target Audience:
 
