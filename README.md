@@ -1,4 +1,4 @@
-# Welcome to Water My Plants (2) (March 2-6, 2020 - Lambda Build Week)!
+# Welcome to Water My Plants(2) (March 2-6, 2020 - Lambda Build Week)!
 
 ## Team:
 - UI Developer: Julia Vu
@@ -14,7 +14,6 @@ Ensuring that all your plants are consistently watered can be quite the task. Wa
 ## Features:
 
 - What features are required for your minimum viable product?
-
     - User creation and login
     - User can add new plants to the user profile profile
     - User can edit/delete plants from the user profile
@@ -38,18 +37,14 @@ Ensuring that all your plants are consistently watered can be quite the task. Wa
 - Do APIs require you to contact its maintainer to gain access?
     -no
 
-- Are you required to pay to use the API?
+- Are you required to pay to use the API?<br>
     - no
 
 
 ## Target Audience:
 
-- Who is your target audience? Be specific.
+- Who is your target audience?
     - People who own plants and have trouble remembering when to water them
-
-- What feedback have you gotten from potential users?  
-	- None
-
 
 ## Instructions
 
@@ -86,9 +81,7 @@ Follow these steps to set up and work on your project:
 ## STRETCH GOALS 💪
 
 1. Upload images of plants
-2. 
-3. Improve model performance by sourcing additional data
-
+2. Improve model performance by sourcing additional data
 
 ## Contributing
 
@@ -113,9 +106,9 @@ We would love to hear from you about new features which would improve this app a
 # Back-end
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [heroku](https://watermyplants2.herokuapp.com/) <br>
-#### 1️⃣ Additional Documentation: https://www.getpostman.com/collections/785d2d9d619a6135cee4 
-#### 1️⃣ Getting started
+####  Backend delpoyed at [heroku](https://watermyplants2.herokuapp.com/) <br>
+####  Additional Documentation: https://www.getpostman.com/collections/785d2d9d619a6135cee4 
+####  Getting started
 
 To get the server running locally:
 
@@ -125,7 +118,7 @@ To get the server running locally:
 - **npm run test** to start server using testing environment
 
 
-## 2️⃣ Endpoints
+###  Endpoints
 
 #### Authorization Routes
 
@@ -171,7 +164,7 @@ To get the server running locally:
 }
 ```
 
-## 2️⃣ Actions
+###  Actions
 
 `addUser()` -> Registers a new user and returns that user
 
@@ -194,7 +187,7 @@ To get the server running locally:
 `getUser(userId)` -> Returns a single user by user ID
 
 
-## 3️⃣ Environment Variables
+### Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
