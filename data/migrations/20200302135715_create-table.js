@@ -4,12 +4,14 @@ exports.up = function(knex) {
         users.increments();
         users
             .string('username', 255)
-            .unique();
+            .unique()
+            .notNullable()
         users
             .string('phone_number', 15)
+            .notNullable()
         users
             .string('password', 255)
-            .notNullable();
+            .notNullable()
     })
 
     .createTable('plants', col => {
@@ -21,7 +23,6 @@ exports.up = function(knex) {
         col
             .string('h2O_freq', 255)
             .notNullable();
-        // add image
         col
             .integer("user_id")
             .notNullable()
@@ -29,8 +30,6 @@ exports.up = function(knex) {
             .references("id")
             .inTable("users")
     })
-
-        //create table for "garden"?
 };
 
 exports.down = function(knex, Promise) {

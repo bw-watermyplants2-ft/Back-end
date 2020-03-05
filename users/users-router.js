@@ -26,7 +26,32 @@ router.put("/:userId", (req, res) =>{
             if(user){    
                 Users.updateUser(changes, userId)
                     .then(updated => {
-                        res.status(200).json(updated)
+                        res.status(200).json({message: "successfully updated user information"})
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(500).json({errorMessage: "unable to process this request"})
+                    })
+            } else {
+                res.status(404).json({errorMessage: "user not found"})
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({errorMessage: "unable to process this request"})
+        });
+})
+
+//delete user
+router.delete("/:userId", (req, res) =>{
+    const userId = req.params.userId;
+    
+    Users.findUsersId(userId)
+        .then(user => {
+            if(user){    
+                Users.removeUser(userId)
+                    .then(removed => {
+                        res.status(200).json({message: "successfully deleted user"})
                     })
                     .catch(err => {
                         console.log(err)

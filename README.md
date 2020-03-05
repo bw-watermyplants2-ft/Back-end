@@ -1,136 +1,95 @@
-# Back-end
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
+# Welcome to Water My Plants (2) (March 2-6, 2020 - Lambda Build Week)!
 
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+## Team:
+- UI Developer: Julia Vu
+- React 1: Christian Rios
+- React 2: Magdiel Martinez
+- Backend Developer: Kristin "KP" Parrish
+- Project Lead: Thomas Cacciatore
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+## Proposal:
 
-# API Documentation
+Ensuring that all your plants are consistently watered can be quite the task. Water My Plants is an app that helps to solve those problems with an easy to use interface for creating a plant watering schedule tailored to each individual plant.
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+## Features:
 
-## 1️⃣ Getting started
+- What features are required for your minimum viable product?
 
-To get the server running locally:
+    - User creation and login
+    - User can add new plants to the user profile profile
+    - User can edit/delete plants from the user profile
+    - User can edit/delete user profile
 
-🚫 adjust these scripts to match your project
+- What features may you wish to put in a future release?
+    - Upload plant images
+    - Allow users to differentiate gardens - example: indoor & outdoor plant groupings
+    - 
+    - Automate notifications for watering frequency
 
-- Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
 
-### Backend framework goes here
+## Frameworks - Libraries:
 
-🚫 Why did you choose this framework?
+- What 3rd party frameworks/libraries are you considering using?
+    - React Hook Form (form validation instead of Formik) https://react-hook-form.com – React I
+    - Context – React II
+    - Express – Backend
+    - Node – Backend
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+- Do APIs require you to contact its maintainer to gain access?
+    -no
 
-## 2️⃣ Endpoints
+- Are you required to pay to use the API?
+    - no
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+## Target Audience:
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+- Who is your target audience? Be specific.
+    - People who own plants and have trouble remembering when to water them
 
-#### User Routes
+- What feedback have you gotten from potential users?  
+	- None
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
 
-# Data Model
+## Instructions
 
-🚫This is just an example. Replace this with your data model
+**Read these instructions carefully.**
 
-#### 2️⃣ ORGANIZATIONS
+This is a team assignment with individual assessments. All work must be your own but remember to collaborate with everyone on your team. Your challenge score is a measure of your ability to work independently using the material covered through this sprint and there is a score on overall teamwork. You need to demonstrate proficiency in the concepts and objectives introduced and practiced in preceding days.
 
----
 
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
+## Commits
 
-#### USERS
+In case you ever need to return to old code. Remember your **ABC: Always Be Committing!**
 
----
 
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
-```
+## Project Set Up
 
-## 2️⃣ Actions
+Follow these steps to set up and work on your project:
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+- [ ]  Clone your OWN version of Repo.
+- [ ]  Create a new Branch on the clone: `git checkout -b <firstName-lastName>`.
+- [ ]  Implement the project on this branch, committing changes regularly.
+- [ ]  Push commits: `git push origin <firstName-lastName>`.
+- [ ]  **LOOK** at your project directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
+- [ ]  **RUN** `yarn install` or `npm install` to retrieve the client-side dependencies.
+- [ ]  **RUN** `yarn start` or `npm start` to fire up your React application.
+- [ ] **RUN** `yarn add` or `npm i` to add frameworks and libraries needed for your project (i.e. redux, formik, yup, react-router-dom, etc.).
 
-`getOrgs()` -> Returns all organizations
 
-`getOrg(orgId)` -> Returns a single organization by ID
+## Minimum Viable Product (MVP)
 
-`addOrg(org)` -> Returns the created org
+1. User creation and login
+2. Add plant objects
+3. CRUD operations on Users and Plants
 
-`updateOrg(orgId)` -> Update an organization by ID
+## STRETCH GOALS 💪
 
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
+1. Upload images of plants
+2. 
+3. Improve model performance by sourcing additional data
 
-`getUser(userId)` -> Returns a single user by user ID
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
-
-`updateUser(userId, changes object)` -> Updates a single user by ID.
-
-`deleteUser(userId)` -> deletes everything dependent on the user
-
-## 3️⃣ Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables.
-
-create a .env file that includes the following:
-
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
-    
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -149,25 +108,97 @@ Please note we have a [code of conduct](./code_of_conduct.md). Please follow it 
 
 We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
 
-### Pull Requests
 
-If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
 
-Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
+# Back-end
+# API Documentation
 
-#### Pull Request Guidelines
+#### 1️⃣ Backend delpoyed at [heroku](https://watermyplants2.herokuapp.com/) <br>
+#### 1️⃣ Additional Documentation: https://www.getpostman.com/collections/785d2d9d619a6135cee4 
+#### 1️⃣ Getting started
 
-- Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-- Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
-- Ensure that your code conforms to our existing code conventions and test coverage.
-- Include the relevant issue number, if applicable.
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+To get the server running locally:
 
-### Attribution
+- Clone this repo
+- **npm install** to install all required dependencies
+- **npm run server** to start the local server
+- **npm run test** to start server using testing environment
 
-These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
-## Documentation
+## 2️⃣ Endpoints
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+#### Authorization Routes
+
+| Method | Endpoint                | Access Control | Description                                  |
+| ------ | ----------------------- | -------------- | -------------------------------------------- |
+| POST   | `/auth/register`        | all users      | Returns a newly created user                 |
+| POST   | `/auth/login`           | all users      | Login a previously created user              |
+
+#### User Routes
+
+| Method | Endpoint                         | Description                                          |
+| ------ | ---------------------------------| ---------------------------------------------------- |
+| GET    | `/users/:userId`                 | Returns info for a single logged in user             |
+| PUT    | `/users/:userId`                 | Updates info for a single user                       |
+| DELETE | `/users/:userId`                 | Deletes a single user                                |
+| GET    | `/users/:userId/plants`          | Returns plant info for a single logged in user       |
+| GET    | `/users/:userId/plants/:plantId` | Returns info for a single plant object               |
+| POST   | `/users/:userId/plants`          | Returns a new plant object                           |
+| PUT    | `/users/:userId/plants/:plantId` | Updates a plant object                               |
+| DELETE | `/users/:userId/plants/:plantId` | Deletes a plant object                               |
+
+# Data Model
+#### USERS
+---
+```
+{
+  id: UUID
+  username: STRING
+  phone_number: STRING
+  password: STRING
+}
+```
+
+#### PLANTS
+---
+```
+{
+  id: UUID
+  user_id: UUID foreign key in USERS table
+  nickname: STRING
+  species: STRING
+  h2O_freq: STRING
+}
+```
+
+## 2️⃣ Actions
+
+`addUser()` -> Registers a new user and returns that user
+
+`updateUser(changes, userId)` -> Updates a single user by userId
+
+`removeUser(userId)` -> Delete a user by ID
+
+`findUsersId(id)` -> returns a user's id, username, & phone number by userID
+
+`findPlantsByUser(userId)` -> returns a list of all created plants
+
+`addPlant(plant, userId)` -> Returns the created plant
+
+`updatePlant(changes, plantId)` -> Update a plant by ID
+
+`deletePlant(plantId)` -> Delete a plant by ID
+
+`getUser(orgId)` -> if no param all users
+
+`getUser(userId)` -> Returns a single user by user ID
+
+
+## 3️⃣ Environment Variables
+
+In order for the app to function correctly, the user must set up their own environment variables.
+
+create a .env file that includes the following:
+
+    *  NODE_ENV - set to "development" until ready for "production"
+    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])

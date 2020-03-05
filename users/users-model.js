@@ -3,6 +3,7 @@ const db = require('../data/dbConfig.js');
 module.exports = {
     addUser,
     updateUser,
+    removeUser,
     findUsersId,
     findBy,
     findByPlantId,
@@ -28,10 +29,20 @@ function updateUser(changes, userId){
 
 function findUsersId(id) {
     return db("users")
-        .select("id", "username", "phone_number", "password")
+        .select("id", "username", "phone_number")
         .where({ id })
         .first()
 }
+
+function removeUser(id){
+    return db("users")
+        .where({ id })
+        .then(found => {
+            return db("users")
+            .where({ id })
+            .del()
+        });
+};
 
 function findBy(filter) {
     return db("users").where(filter);
