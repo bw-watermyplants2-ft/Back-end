@@ -134,7 +134,7 @@ router.put("/:userId/plants/:plantId", (req, res) =>{
                         if(plant){
                             Users.updatePlant(changes, plantId)
                                 .then(updated => {
-                                    res.status(200).json(updated).json({message: "successfully updated"});
+                                    res.status(200).json({message: "successfully updated"});
                                 })
                                 .catch(err => {
                                     console.log(err)
