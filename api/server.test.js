@@ -19,7 +19,7 @@ describe("POST to /register", () => {
     test("should return status 201 CREATED", () => {
         return request(server)
             .post("/auth/register")
-            .send({ username:"testname4", password:"testpw4" })
+            .send({ username:"testname", phonenumber: "1111111", password:"testpw4" })
             .then(res => {
                 expect(res.status).toBe(201);
         });
@@ -53,24 +53,3 @@ describe("POST to /login", () => {
         });
     });
 });
-
-//get user's info
-describe("GET to /users", () => {
-    //1
-        test("should return 401 unauthorized", function() {
-        return request(server)
-            .get("/users/:userId")
-            .then(res => {
-                expect(res.status).toBe(401);
-            });
-        });  
-    
-    //2
-        test("should return JSON formatted body", function() {
-            return request(server)
-                .get("/api/users")
-                .then(res => {
-                    expect(res.type).toMatch(/json/);
-                });
-        });
-    }); 
