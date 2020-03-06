@@ -46,7 +46,7 @@ router.post('/login', (req, res) => {
 
     } else {
 
-    Users.findBy({ phone_number: req.body.phone_number})
+    Users.findBy({ phonenumber: req.body.phonenumber})
     .first()
     .then(user => {
         if (user && bcrypt.compareSync(req.body.password, user.password)) {
